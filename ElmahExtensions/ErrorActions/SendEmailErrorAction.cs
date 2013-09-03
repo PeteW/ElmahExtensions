@@ -60,6 +60,7 @@ namespace ElmahExtensions.ErrorActions
                                 .ForEach(x => message.To.Add(x));
             message.Subject = FormatString(FormattedSubject,error);
             message.Body = FormatString(FormattedBody, error);
+            message.IsBodyHtml = true;
             var client = new SmtpClient();
             client.EnableSsl = IsTlsEnabled;
             client.Send(message);
