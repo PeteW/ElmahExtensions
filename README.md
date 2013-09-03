@@ -4,7 +4,7 @@ ElmahExtensions
 Built on top of the ELMAH platform, this library extends the way ELMAH reacts to errors
 ELMAH itself does a wonderful job with detailed unobtrusive logging. The ElmahExtensions give tighter control over special conditions on how to react to specific errors using conditions and actions.
 
-## Configuration
+## Configuration settings
 
 * **CustomErrorHandlerConfiguration node** - Required, single node. Has the optional attribute "*ErrorHandlerLoggingLevel*" which provides trace output debugging. Valid values are Debug, Info, Warn, Error. Default is Error.
   * **ErrorHandlers node** - Required, single node. No attributes. Contains a collection of ErrorHandlerSections.
@@ -32,7 +32,7 @@ ELMAH itself does a wonderful job with detailed unobtrusive logging. The ElmahEx
 
 
 
-## Installation/configuration
+## Installation
 
 Step 1: place ELMAH dll and ElmahExtensions dll in the bin folder
 
