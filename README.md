@@ -42,18 +42,17 @@ Step 2: add the config section:
     <section name="ElmahExtensions" type="ElmahExtensions.ElmahExtentsionsConfigurationSectionHandler, ElmahExtensions"/>
   </configSections>
 ```
-and the actual config section. Below is an example of 
+and the actual config section. Below is an example of two sections. The first section executed when an error is encountered containing a match on a specific substring and it writes to the event log. 
+The second section executes with all NullReferenceExceptions and sends a templated email to specific recipients.
 ```xml
   <ElmahExtensions>
     <CustomErrorHandlerConfiguration ErrorHandlerLoggingLevel="Debug">
       <ErrorHandlers>
         <ErrorHandlerSection Name="Section01">
           <ErrorConditions>
-            <DummyErrorCondition />
             <ElmahErrorMessageSubstringCondition Substring="object reference not set" />
           </ErrorConditions>
           <ErrorActions>
-            <DummyErrorAction Name="TestAction01" />
             <WriteToEventLogErrorAction
               Name="EventLogger01"
               EventLogEntryType="Warning"
