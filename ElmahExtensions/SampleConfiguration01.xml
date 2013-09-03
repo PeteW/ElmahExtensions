@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CustomErrorHandlerConfiguration ErrorHandlerLoggingLevel="Debug">
+  <ErrorHandlers>
+    <ErrorHandlerSection Name="Section01">
+      <ErrorConditions>
+        <DummyErrorCondition />
+        <ElmahErrorMessageSubstringCondition Substring="object reference not set" />
+      </ErrorConditions>
+      <ErrorActions>
+        <DummyErrorAction Name="TestAction01" />
+        <WriteToEventLogErrorAction 
+          Name="EventLogger01" 
+          EventLogEntryType="Warning" 
+          SourceName="Test" 
+          StringFormat="Error occurred in [${ApplicationName}]: Details: [${Detail}]" />
+      </ErrorActions>
+    </ErrorHandlerSection>
+    <ErrorHandlerSection Name="Section02">
+      <ErrorConditions>
+        <CatchAllErrorCondition />
+        <ExceptionTypeErrorCondition TypeName="System.NullReferenceException"/>
+      </ErrorConditions>
+      <ErrorActions>
+        <SendEmailErrorAction
+          From="talktopete@gmail.com"
+          Recipients="reallifedata@gmail.com,talktopete@gmail.com"
+          CcRecipients="talktopete@gmail.com"
+          FormattedSubject="Error occurred in application [${ApplicationName}]"
+          FormattedBody="Details: [${Detail}]"
+          EnableSsl="true"
+          />
+      </ErrorActions>
+    </ErrorHandlerSection>
+  </ErrorHandlers>
+</CustomErrorHandlerConfiguration>
