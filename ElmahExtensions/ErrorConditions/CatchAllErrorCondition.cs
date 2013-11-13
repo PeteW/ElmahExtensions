@@ -1,8 +1,13 @@
-﻿using Elmah;
+﻿using System;
+using Elmah;
 
 namespace ElmahExtensions.ErrorConditions
 {
-    public class CatchAllErrorCondition:ErrorCondition
+    /// <summary>
+    /// Always returns true
+    /// </summary>
+    [Serializable]
+    public class CatchAllErrorCondition : ErrorCondition
     {
         public override bool IsTrue(Error error)
         {

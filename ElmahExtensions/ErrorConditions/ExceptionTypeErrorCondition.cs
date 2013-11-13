@@ -11,7 +11,6 @@ namespace ElmahExtensions.ErrorConditions
         [XmlAttribute]
         public string TypeName { get; set; }
 
-
         public override bool IsTrue(Error error)
         {
             return error.Type == TypeName;

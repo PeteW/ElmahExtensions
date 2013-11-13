@@ -21,7 +21,7 @@ namespace ElmahExtensions
         /// Test serialization
         /// </summary>
         [TestMethod]
-        public void TestConfigurationSerialize()
+        public void TestConfigurationSerializeDeserialize()
         {
             var config = new CustomErrorHandlerConfiguration();
             config.ErrorHandlers = new List<ErrorHandlerSection>();
@@ -42,11 +42,29 @@ namespace ElmahExtensions
             config.ErrorHandlers[0].ErrorConditions.Add(new CatchAllErrorCondition());
 
             var xmls = new XmlSerializer(typeof (CustomErrorHandlerConfiguration));
-
+            var serialized = string.Empty;
             using (var writer = new StringWriter())
             {
                 xmls.Serialize(writer, config);
-                Console.WriteLine(writer.ToString());
+                serialized = writer.ToString();
+            }
+
+            var config2 = CustomErrorHandlerConfiguration.ReadFromString(serialized);
+            Assert.AreEqual(config.ErrorHandlers.Count, config2.ErrorHandlers.Count);
+            for (var i = 0; i < config.ErrorHandlers.Count; i++)
+            {
+                Assert.AreEqual(config.ErrorHandlers[i].ErrorActions.Count, config2.ErrorHandlers[i].ErrorActions.Count);
+                Assert.AreEqual(config.ErrorHandlers[i].ErrorConditions.Count, config2.ErrorHandlers[i].ErrorConditions.Count);
+                Assert.AreEqual(config.ErrorHandlers[i].Name, config2.ErrorHandlers[i].Name);
+                for (var j = 0; j < config.ErrorHandlers[i].ErrorActions.Count; j++)
+                {
+                    Assert.AreEqual(config.ErrorHandlers[i].ErrorActions[j].Name, config2.ErrorHandlers[i].ErrorActions[j].Name);
+                    Assert.AreEqual(config.ErrorHandlers[i].ErrorActions[j].GetType(), config2.ErrorHandlers[i].ErrorActions[j].GetType());
+                }
+                for (var j = 0; j < config.ErrorHandlers[i].ErrorConditions.Count; j++)
+                {
+                    Assert.AreEqual(config.ErrorHandlers[i].ErrorConditions[j].GetType(), config2.ErrorHandlers[i].ErrorConditions[j].GetType());
+                }
             }
         }
 

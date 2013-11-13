@@ -5,7 +5,10 @@ using ElmahExtensions.Utils;
 
 namespace ElmahExtensions
 {
-    public class ElmahExtentsionsConfigurationSectionHandler:IConfigurationSectionHandler
+    /// <summary>
+    /// Build a CustomErrorHandlerConfiguration from a config section
+    /// </summary>
+    public class ElmahExtentsionsConfigurationSectionHandler : IConfigurationSectionHandler
     {
         public object Create(object parent, object configContext, XmlNode section)
         {

@@ -12,12 +12,16 @@ namespace ElmahExtensions
 
         public void HandleError(Error error)
         {
+            //for each error handler section
             foreach (var errorHandlerSection in Configuration.ErrorHandlers)
             {
+                //if all the conditions are met
                 if (errorHandlerSection.ErrorConditions.All(x => x.IsTrue(error)))
                 {
                     if (Configuration.LoggingLevel == LoggingLevel.Debug)
                         Trace.WriteLine(string.Format("Debug: Running section [{0}]", errorHandlerSection.Name));
+                    
+                    //for each error action
                     foreach (var errorAction in errorHandlerSection.ErrorActions)
                     {
                         try
