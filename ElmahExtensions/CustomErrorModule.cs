@@ -45,6 +45,8 @@ namespace ElmahExtensions
             LogException(args.Exception, args.Context);
         }
 
+        delegate void ErrorHandlerDelegate(Error error);
+
         protected virtual void LogException(Exception e, HttpContext context)
         {
             e.AssertNotNull("e");
@@ -61,7 +63,7 @@ namespace ElmahExtensions
             try
             {
                 var error = new Error(e, context);
-                new CustomErrorHandler(){Configuration = SettingsManager.Config}.HandleError(error);
+                new ErrorHandlerDelegate(err => new CustomErrorHandler() {Configuration = SettingsManager.Config}.HandleError(err))(error);
             }
             catch (Exception localException)
             {

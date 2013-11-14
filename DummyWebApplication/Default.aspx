@@ -11,6 +11,7 @@
         <div>
             <asp:Literal runat="server" ID="ltrResponse"></asp:Literal>
             <asp:Button runat="server" ID="btnRunException" Text="Generate an exception!" />
+            <asp:Button runat="server" ID="btnRunExceptionWithErrorSignal" Text="Generate an exception with elmah error signal!" />
         </div>
     </form>
 </body>
